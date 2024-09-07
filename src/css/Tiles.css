@@ -1,0 +1,346 @@
+/* Container for tiles */
+.tile-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+/* General styling for tiles */
+.tile,
+.my-bet-tile {
+  display: flex;
+  flex-direction: column;
+  flex: 0 1 calc(33.33% - 20px);
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8);
+  margin: 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  min-height: 350px; /* Adjusted height for better uniformity */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Tile content */
+.tile-content,
+.my-bet-tile-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Image container within tile */
+.tileimg-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Image styling within tile */
+.tileimg-div img {
+  max-width: 100%;
+  max-height: 200px; /* Increased height for bigger image */
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+/* Hover effect for images */
+.tileimg-div img:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+/* Heading styling within tile */
+.tile h2,
+.my-bet-tile h2 {
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icon color within heading */
+.tile h2 svg,
+.my-bet-tile h2 svg {
+  color: #4a90e2;
+  margin: 0; /* Ensure no extra margin around icons */
+}
+
+/* Button group styling */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+/* Styling for yes and no buttons */
+.yes-button,
+.no-button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.yes-button {
+  background-color: #046908;
+  color: white;
+}
+
+.no-button {
+  background-color: #97160c;
+  color: white;
+}
+
+/* Hover effects for buttons */
+.yes-button:hover,
+.no-button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Disabled state for buttons */
+.yes-button:disabled,
+.no-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Icon styling for total, time, and result */
+.total svg,
+.time svg,
+.result svg {
+  font-size: 1.2rem;
+  color: #4a90e2;
+}
+
+/* Right group alignment */
+.right-group {
+  display: flex;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 80px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 3px;
+  font-size: 0.75rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  left: 50%;
+  margin-left: -40px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -4px;
+  border-width: 4px;
+  border-style: solid;
+  border-color: black transparent transparent transparent;
+}
+
+/* Show the tooltip text when hovering over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Overlay styling for tiles */
+.tile .overlay,
+.my-bet-tile .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 10px;
+  z-index: 10;
+}
+
+/* Text styling on overlay */
+.tile .overlay span,
+.my-bet-tile .overlay span {
+  background: rgba(255, 0, 0, 0.8);
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Container for my bets */
+.mybets-container {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Centered text */
+.para {
+  text-align: center;
+}
+
+/* Border color for bet tiles based on selection */
+.my-bet-tile.bet-on-yes {
+  border: 4px solid rgb(32, 219, 32);
+}
+
+.my-bet-tile.bet-on-no {
+  border: 4px solid rgb(204, 16, 16);
+}
+
+/* Bet-on text styling */
+.bet-on {
+  font-weight: bold;
+}
+
+.bet-on.bet-on-yes {
+  color: rgb(31, 235, 31);
+}
+
+.bet-on.bet-on-no {
+  color: rgb(142, 10, 10);
+}
+
+/* Search bar styling */
+.search-bar {
+  margin-bottom: 30px;
+  margin-left: 15px;
+  padding: 10px;
+  width: 30%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Highlighted text styling */
+.highlight {
+  background-color: rgb(231, 237, 65);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* Hover effect for my bet tiles */
+.my-bet-tile:hover .highlight {
+  animation: pop-up 0.3s ease-in-out;
+}
+.misc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.misc p {
+  margin: 0;
+  padding: 5px 0;
+  display: flex;
+  align-items: center;
+}
+
+.misc p svg {
+  margin-right: 5px; /* Space between the icon and text */
+  font-size: 18px; /* Adjust icon size to match text */
+}
+/* Animation for pop-up effect */
+@keyframes pop-up {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .tile,
+  .my-bet-tile {
+    flex: 0 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 900px) {
+  .tile,
+  .my-bet-tile {
+    flex: 0 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .tile,
+  .my-bet-tile {
+    flex: 0 1 calc(100% - 20px);
+  }
+}
+
+/* Hover effect for tiles */
+.tile:hover,
+.my-bet-tile:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.15), 0 16px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Additional styling for tile headings */
+.tile h2,
+.my-bet-tile h2 {
+  margin-top: 0;
+}
+
+/* Paragraph styling within tile */
+.tile p,
+.my-bet-tile p {
+  margin: 10px 0;
+}
+
+/* Category text styling */
+.tile-category,
+.my-bet-tile-category {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: darkblue;
+}

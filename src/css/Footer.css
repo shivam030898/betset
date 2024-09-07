@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure the wrapper takes at least the full height of the viewport */
+}
+
+.content {
+  flex: 1; /* Allow the content to grow and take up the remaining space */
+  padding-bottom: 60px; /* Add padding to the bottom to prevent overlap with the footer */
+}
+
+.footer {
+  border-top: 1px solid #ccc; /* Add a top border line */
+  padding: 20px; /* Padding */
+  text-align: center; /* Center text */
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  position: fixed; /* Fix the footer at the bottom */
+  bottom: 0; /* Align to the bottom of the viewport */
+  left: 0;
+  right: 0;
+  background-color: white; /* Optional: Set a background color for the footer */
+  z-index: 1000; /* Ensure it stays above other content */
+}

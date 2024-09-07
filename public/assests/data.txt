@@ -1,0 +1,81 @@
+crypto events:[
+{
+   id:1,
+   description:"Will Bitcoin reach 65k by the end of June?",
+ }
+
+ {
+   id:2,
+   description:"Ethereum above 3.5k by the end of June?"
+ }
+
+ {
+   id:3,
+   description:"Will POPCAT reach to $1B?",  
+ }
+
+{
+    id:4,
+    description:"Will Bitcoin reach below $57k in June?",
+ }
+]
+
+Cricket Events:[
+    {
+        id:5,
+        description:"Will India beat England in semi-final of T20 World Cup",
+    }
+    {
+        id:6,
+        description:"Will South Africa beat Afghanistan in semi-final of T20 World Cup",
+    }
+    {
+        id:7,
+        description:"Will India Win the Icc T20 World Cup 2024",
+    }
+    {
+        id:8,
+        description:"Will there be more than one time rain in IND vs ENG Match",
+    }
+]
+
+Football Events:[
+    {
+        id:9,
+        description:"Will Argentina win the Copa America",
+    }
+    {
+        id:10,
+        description:"Will France win the Euro 2024",
+    }
+    {
+        id:11,
+        description:"Will Brazil reach the Final of Copa America",
+    }
+    {
+        id:12,
+        description:"Will Ronaldo score more than 6 goals in Euro",
+    }
+
+]
+
+Political Events:[
+    {
+        id:13,
+        description:"Will Trump win Presidential elections?",
+    }
+
+    {
+        id:14,
+        description:"Will trump say Crypto in his debate",
+    }
+    {
+        id:15,
+        description:"Will Biden say Felon in his Debate",
+    }
+    {
+        id:16,
+        description:"Will Om birla become the Lok sabha Speaker",
+    }
+
+]

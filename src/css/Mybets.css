@@ -1,0 +1,40 @@
+.mybets-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center items vertically */
+  justify-content: center; /* Center items horizontally */
+}
+
+h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+.no-bets-image {
+  max-width: 55%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
+.search-bar:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 3px 7px rgba(74, 144, 226, 0.4);
+}

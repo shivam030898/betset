@@ -1,8 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
-import '../css/TileDialog.css';
+import '../css/NoTileDialog.css';
 import '../css/Tiles.css';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { ethers } from 'ethers'; 
+import EmojiEventsOutlinedIcon from "@mui/icons-material/EmojiEventsOutlined";
+import QueryBuilderIcon from "@mui/icons-material/QueryBuilder";
+import sports from "../components/assests/sports.jpg";
+import election from "../components/assests/Politics.jpg";
+import GeoImage from "../components/assests/Geo.jpg";
+import movies from "../components/assests/movies.jpg";
+import crypto from "../components/assests/crypto.jpg";
+import Olympics from "../components/assests/Olympic.jpg"
 
 const contractAbi = [{"inputs":[{"internalType":"address","name":"_stableToken","type":"address"},{"internalType":"address","name":"_feeCollector","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":true,"internalType":"address","name":"bettor","type":"address"},{"indexed":false,"internalType":"bool","name":"betOnYes","type":"bool"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"BetPlaced","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":true,"internalType":"address","name":"bettor","type":"address"},{"indexed":false,"internalType":"bool","name":"betOnYes","type":"bool"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"fee","type":"uint256"}],"name":"BetWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newEndDate","type":"uint256"}],"name":"EndDateUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"string","name":"description","type":"string"},{"indexed":false,"internalType":"uint256","name":"endDate","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"resultDate","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"commission","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"withdrawCommission","type":"uint256"}],"name":"MarketCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"bool","name":"outcome","type":"bool"}],"name":"MarketResolved","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newResultDate","type":"uint256"}],"name":"ResultDateUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":true,"internalType":"address","name":"claimant","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WinningsClaimed","type":"event"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"}],"name":"claimWinnings","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_description","type":"string"},{"internalType":"uint256","name":"_endDate","type":"uint256"},{"internalType":"uint256","name":"_resultDate","type":"uint256"},{"internalType":"uint256","name":"_commission","type":"uint256"},{"internalType":"uint256","name":"_withdrawCommission","type":"uint256"}],"name":"createMarket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"feeCollector","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"marketCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"markets","outputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"string","name":"description","type":"string"},{"internalType":"uint256","name":"endDate","type":"uint256"},{"internalType":"uint256","name":"resultDate","type":"uint256"},{"internalType":"uint256","name":"totalYesBets","type":"uint256"},{"internalType":"uint256","name":"totalNoBets","type":"uint256"},{"internalType":"bool","name":"resolved","type":"bool"},{"internalType":"bool","name":"outcome","type":"bool"},{"internalType":"uint256","name":"commission","type":"uint256"},{"internalType":"uint256","name":"withdrawCommission","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"bool","name":"betOnYes","type":"bool"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"placeBet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"bool","name":"outcome","type":"bool"}],"name":"resolveMarket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"stableToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"uint256","name":"newEndDate","type":"uint256"}],"name":"updateEndDate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"uint256","name":"newResultDate","type":"uint256"}],"name":"updateResultDate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"bool","name":"betOnYes","type":"bool"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdrawBet","outputs":[],"stateMutability":"nonpayable","type":"function"}
 ];
@@ -12,7 +20,7 @@ const contractAddress = '0x89eD504B7B1f5799d81290Ff0D7D3c99D0a5D0E2';
 const stableTokenAddress ='0x2b622D678380e41B2e0aed16e70Ebc348d71DB65';
 
 
-const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end_date,result_date }) => {
+const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end_date,result_date,selectedCategory }) => {
   const noDialogRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const [ethersProvider, setEthersProvider] = useState(null);
@@ -107,6 +115,17 @@ const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end
     }
   };
 
+
+  const categoryImages = {
+    sports: sports,
+    movies: movies,
+    crypto: crypto,
+    election: election,
+    geopolitics: GeoImage,
+    olympics: Olympics
+  };
+
+  const tileImage = categoryImages[selectedCategory] || crypto;
   return (
     <>
       {isOpen && (
@@ -114,7 +133,8 @@ const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end
           <div className="no-tile-dialog" ref={noDialogRef}>
             <button className='close-button' onClick={onClose}><CancelIcon /></button>
             <div className="tile-dialog-content">
-              {img && <img src={img} alt={heading} className="event-image" />}
+            <img src={tileImage} alt="Main Tile" className="main-tile-image" />
+            {img && <img src={img} alt={heading} className="event-image" />}
               <h2>{description}</h2>
               <input
                 type="text"
@@ -127,8 +147,20 @@ const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end
                 <button className="no-bet-button" onClick={handleBetYesClick}>Bet No</button>
               </div>
               <div className='misc'>
-              <p>Ends on:</p><p>{end_date}</p>
-              <p>Result on:</p><p>{result_date}</p>
+                <div className="tooltip">
+                  <QueryBuilderIcon style={{ color: "#4a90e2" }} />
+                  <span className="tooltiptext bg-black text-white p-2 rounded">
+                    End Date
+                  </span>
+                  <p>{new Date(result_date).toLocaleDateString()}</p>
+                </div>
+                <div className="tooltip">
+                  <EmojiEventsOutlinedIcon style={{ color: "#4a90e2" }} />
+                  <span className="tooltiptext bg-black text-white p-2 rounded">
+                    Result Date
+                  </span>
+                  <p>{new Date(result_date).toLocaleDateString()}</p>
+                </div>
               </div>
             </div>
           </div>

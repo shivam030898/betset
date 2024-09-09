@@ -1,0 +1,154 @@
+.tile-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+  }
+  
+  .tile-dialog-content {
+    display: block;
+    margin: 0 auto 1rem auto; /* Center the image and add margin below */
+    max-width: 100%; /* Ensure the image does not overflow its container */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .main-tile-image {
+    display: block;
+    margin: 0 auto 1rem auto; /* Center the image and add margin below */
+    max-width: 100%; /* Ensure the image does not overflow its container */
+    height: auto; /* Maintain aspect ratio */
+  }
+  .close-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    transition: color 0.3s, transform 0.3s;
+  }
+  
+  .close-buttons:hover {
+    color: #ff5c5c; /* Change color on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+  }
+  
+  .no-tile-dialog {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 1001;
+  }
+  
+  .tile-dialog-content {
+    text-align: center;
+  }
+  
+  .event-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  .close-button {
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: #333;
+    font-size: 24px;
+  }
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the text */
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .normal-input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    margin-top: 20px; /* Optional: Add some space above the button */
+  }
+  
+  .no-bet-button {
+    background-color: #97160c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .yes-bet-button:hover {
+    background-color: rgb(4, 90, 4);
+  }
+  
+  .misc {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around; /* Ensure the icons are spaced evenly */
+    align-items: center; /* Vertically center the content */
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .misc p {
+    margin: 0;
+    padding: 5px 10px; /* Adjust padding for less spacing */
+    display: flex;
+    align-items: center; /* Center icon and text vertically */
+    gap: 5px; /* Add a small gap between the icon and text */
+  }
+  
+  .misc p svg {
+    font-size: 16px; /* Adjust icon size to be smaller */
+    margin-right: 0; /* Remove extra space between icon and text */
+  }
+  

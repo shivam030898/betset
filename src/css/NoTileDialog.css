@@ -125,15 +125,10 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
-  
-  .yes-bet-button:hover {
-    background-color: rgb(4, 90, 4);
-  }
-  
   .misc {
     margin-top: 20px;
     display: flex;
-    justify-content: space-around; /* Ensure the icons are spaced evenly */
+    justify-content: space-between; /* Ensure the icons are spaced evenly */
     align-items: center; /* Vertically center the content */
     font-size: 14px;
     color: #666;

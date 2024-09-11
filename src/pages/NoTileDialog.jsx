@@ -11,6 +11,7 @@ import GeoImage from "../components/assests/Geo.jpg";
 import movies from "../components/assests/movies.jpg";
 import crypto from "../components/assests/crypto.jpg";
 import Olympics from "../components/assests/Olympic.jpg"
+import SavingsOutlinedIcon from "@mui/icons-material/SavingsOutlined";
 
 const contractAbi = [{"inputs":[{"internalType":"address","name":"_stableToken","type":"address"},{"internalType":"address","name":"_feeCollector","type":"address"}],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":true,"internalType":"address","name":"bettor","type":"address"},{"indexed":false,"internalType":"bool","name":"betOnYes","type":"bool"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"BetPlaced","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":true,"internalType":"address","name":"bettor","type":"address"},{"indexed":false,"internalType":"bool","name":"betOnYes","type":"bool"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"fee","type":"uint256"}],"name":"BetWithdrawn","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newEndDate","type":"uint256"}],"name":"EndDateUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"string","name":"description","type":"string"},{"indexed":false,"internalType":"uint256","name":"endDate","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"resultDate","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"commission","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"withdrawCommission","type":"uint256"}],"name":"MarketCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"bool","name":"outcome","type":"bool"}],"name":"MarketResolved","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":false,"internalType":"uint256","name":"newResultDate","type":"uint256"}],"name":"ResultDateUpdated","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"internalType":"uint256","name":"marketId","type":"uint256"},{"indexed":true,"internalType":"address","name":"claimant","type":"address"},{"indexed":false,"internalType":"uint256","name":"amount","type":"uint256"}],"name":"WinningsClaimed","type":"event"},{"inputs":[],"name":"admin","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"}],"name":"claimWinnings","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_description","type":"string"},{"internalType":"uint256","name":"_endDate","type":"uint256"},{"internalType":"uint256","name":"_resultDate","type":"uint256"},{"internalType":"uint256","name":"_commission","type":"uint256"},{"internalType":"uint256","name":"_withdrawCommission","type":"uint256"}],"name":"createMarket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"feeCollector","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"marketCount","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"","type":"uint256"}],"name":"markets","outputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"string","name":"description","type":"string"},{"internalType":"uint256","name":"endDate","type":"uint256"},{"internalType":"uint256","name":"resultDate","type":"uint256"},{"internalType":"uint256","name":"totalYesBets","type":"uint256"},{"internalType":"uint256","name":"totalNoBets","type":"uint256"},{"internalType":"bool","name":"resolved","type":"bool"},{"internalType":"bool","name":"outcome","type":"bool"},{"internalType":"uint256","name":"commission","type":"uint256"},{"internalType":"uint256","name":"withdrawCommission","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"bool","name":"betOnYes","type":"bool"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"placeBet","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"bool","name":"outcome","type":"bool"}],"name":"resolveMarket","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"stableToken","outputs":[{"internalType":"contract IERC20","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"uint256","name":"newEndDate","type":"uint256"}],"name":"updateEndDate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"uint256","name":"newResultDate","type":"uint256"}],"name":"updateResultDate","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"uint256","name":"marketId","type":"uint256"},{"internalType":"bool","name":"betOnYes","type":"bool"},{"internalType":"uint256","name":"amount","type":"uint256"}],"name":"withdrawBet","outputs":[],"stateMutability":"nonpayable","type":"function"}
 ];
@@ -26,7 +27,7 @@ const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end
   const [ethersProvider, setEthersProvider] = useState(null);
   const [contractInstance, setContractInstance] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
-
+  const [totalBets, setTotalBets] = useState(0);
   const handleClickOutside = (event) => {
     if (noDialogRef.current && !noDialogRef.current.contains(event.target)) {
       onClose();
@@ -114,8 +115,15 @@ const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end
       console.error('Error placing bet:', error);
     }
   };
+  const formatTotalBets = (total) => {
+    const valueInEth = parseFloat(total) / 1e18; // Convert to Ether
+    if (valueInEth >= 1e6) {
+      return `${(valueInEth / 1e6).toFixed(2)}M`; // Convert to millions
+    }
+    return valueInEth.toFixed(2); // Otherwise, show 2 decimal places
+  };
 
-
+  const displayTotalBets = formatTotalBets(totalBets);
   const categoryImages = {
     sports: sports,
     movies: movies,
@@ -147,6 +155,13 @@ const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end
                 <button className="no-bet-button" onClick={handleBetYesClick}>Bet No</button>
               </div>
               <div className='misc'>
+                <div className="tooltip">
+                <SavingsOutlinedIcon style={{ color: "#4a90e2" }} />
+                  <span className="tooltiptext bg-black text-white p-2 rounded">
+                    Total Bets
+                  </span>
+                  <p>{displayTotalBets}</p>
+                </div>
                 <div className="tooltip">
                   <QueryBuilderIcon style={{ color: "#4a90e2" }} />
                   <span className="tooltiptext bg-black text-white p-2 rounded">

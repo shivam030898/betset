@@ -141,6 +141,7 @@ const Tiles = ({
         isOpen={isYesDialogOpen}
         onClose={closeYesDialog}
         description={description}
+        displayTotalBets={displayTotalBets}
         selectedCategory={selectedCategory}
         marketId={marketId}
         end_date={end_date}
@@ -148,6 +149,7 @@ const Tiles = ({
       />
       <NoTileDialog
         isOpen={isNoDialogOpen}
+        displayTotalBets={displayTotalBets}
         onClose={closeNoDialog}
         description={description}
         selectedCategory={selectedCategory}

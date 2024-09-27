@@ -21,13 +21,13 @@ const contractAddress = '0x8b6a2d7b98ca08d5052d75612cd7573877d5c411';
 const stableTokenAddress ='0x2b622D678380e41B2e0aed16e70Ebc348d71DB65';
 
 
-const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end_date,result_date,selectedCategory }) => {
+const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end_date,result_date,selectedCategory,displayTotalBets }) => {
   const noDialogRef = useRef(null);
   const [inputValue, setInputValue] = useState('');
   const [ethersProvider, setEthersProvider] = useState(null);
   const [contractInstance, setContractInstance] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
-  const [totalBets, setTotalBets] = useState(0);
+  // const [totalBets, setTotalBets] = useState(0);
   const handleClickOutside = (event) => {
     if (noDialogRef.current && !noDialogRef.current.contains(event.target)) {
       onClose();
@@ -123,7 +123,7 @@ const NoTileDialog = ({ isOpen, onClose, heading, description, img, marketId,end
     return valueInEth.toFixed(2); // Otherwise, show 2 decimal places
   };
 
-  const displayTotalBets = formatTotalBets(totalBets);
+  // const displayTotalBets = formatTotalBets(totalBets);
   const categoryImages = {
     sports: sports,
     movies: movies,

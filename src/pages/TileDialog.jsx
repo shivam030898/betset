@@ -627,14 +627,15 @@ const YesTileDialog = ({
   marketId,
   end_date,
   result_date,
-  selectedCategory
+  selectedCategory,
+  displayTotalBets
 }) => {
   const yesDialogRef = useRef(null);
   const [inputValue, setInputValue] = useState("");
   const [ethersProvider, setEthersProvider] = useState(null);
   const [contractInstance, setContractInstance] = useState(null);
   const [walletAddress, setWalletAddress] = useState(null);
-  const [totalBets, setTotalBets] = useState(0);
+  // const [totalBets, setTotalBets] = useState(0);
   const handleClickOutside = (event) => {
     if (yesDialogRef.current && !yesDialogRef.current.contains(event.target)) {
       onClose();
@@ -747,7 +748,7 @@ const YesTileDialog = ({
     return valueInEth.toFixed(2); // Otherwise, show 2 decimal places
   };
 
-  const displayTotalBets = formatTotalBets(totalBets);
+  // const displayTotalBets = formatTotalBets(totalBets);
 
   const categoryImages = {
     sports: sports,

@@ -758,7 +758,7 @@ const YesTileDialog = ({
     olympics: Olympics
   };
 
-  const tileImage = categoryImages[selectedCategory] || crypto;
+  const tileImage = categoryImages[selectedCategory];
 
   return (
     <>

@@ -12,33 +12,41 @@
   }
   
   .tile-dialog-content {
-    display: block;
-    margin: 0 auto 1rem auto; /* Center the image and add margin below */
-    max-width: 100%; /* Ensure the image does not overflow its container */
-    height: auto; /* Maintain aspect ratio */
+    text-align: center;
+    padding: 20px; /* Add padding around the content */
+    position: relative;
   }
   .main-tile-image {
-    display: block;
-    margin: 0 auto 1rem auto; /* Center the image and add margin below */
-    max-width: 100%; /* Ensure the image does not overflow its container */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 70%; /* Adjust this value to make the image smaller */
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
   }
-  .close-buttons {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    color: #333;
-    transition: color 0.3s, transform 0.3s;
+  .event-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px;
   }
   
-  .close-buttons:hover {
-    color: #ff5c5c; /* Change color on hover */
-    transform: scale(1.1); /* Slightly enlarge on hover */
-  }
+  .close-button {
+    background: transparent;
+    border: none;
+    position: absolute;
+    top: -10px; /* Move it outside the content area */
+    right: -10px; /* Move it outside the content area */
+    cursor: pointer;
+    color: #333;
+    font-size: 24px;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+    z-index: 10000;
+}
+
+.close-button:hover {
+    color: black;
+}
   
   .no-tile-dialog {
     background-color: #fff;
@@ -55,13 +63,7 @@
     text-align: center;
   }
   
-  .event-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 20px;
-    border-radius: 8px;
-  }
-  
+
   .close-button {
     background: transparent;
     border: none;
@@ -72,6 +74,7 @@
     color: #333;
     font-size: 24px;
   }
+
   .tooltip {
     position: relative;
     display: inline-block;
@@ -101,12 +104,21 @@
   
   .normal-input {
     width: calc(100% - 20px);
-    padding: 10px;
+    padding: 12px 15px; /* Slightly more padding for a better feel */
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 20px; /* More rounded corners */
     font-size: 16px;
     margin-bottom: 20px;
     margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  }
+  
+  /* Styling for focus state */
+  .normal-input:focus {
+    border-color: #4a90e2; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
   }
   
   .button-container {
@@ -116,14 +128,24 @@
   }
   
   .no-bet-button {
-    background-color: #97160c;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
+    background-color: transparent;
+    color: #b3170c;
+    padding: 10px 50px; /* Increase horizontal padding */
+    border: 2px solid #b3170c;
+    border-radius: 8px;
     font-size: 18px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    display: block;
+    margin: 0 auto; /* Center the button */
+  }
+  
+  /* Hover state for the no-bet button */
+  .no-bet-button:hover {
+    background-color: #b3170c;
+    color: white;
+    border-color: #b3170c; /* Ensure border color transitions smoothly */
   }
   .misc {
     margin-top: 20px;
@@ -140,10 +162,13 @@
     display: flex;
     align-items: center; /* Center icon and text vertically */
     gap: 5px; /* Add a small gap between the icon and text */
+    font-weight: 650;
+  
   }
   
   .misc p svg {
     font-size: 16px; /* Adjust icon size to be smaller */
     margin-right: 0; /* Remove extra space between icon and text */
+    
   }
   

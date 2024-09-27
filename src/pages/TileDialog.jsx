@@ -772,7 +772,7 @@ const YesTileDialog = ({
               <img src={tileImage} alt="Main Tile" className="main-tile-image" />
               {img && <img src={img} alt={heading} className="event-image" />}
               <h2>{heading}</h2>
-              <p>{description}</p>
+              <h2>{description}</h2>
               <input
                 type="text"
                 value={inputValue}
